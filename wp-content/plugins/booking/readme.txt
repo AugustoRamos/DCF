@@ -4,7 +4,7 @@ Donate link: http://wpbookingcalendar.com/buy/
 Tags: booking calendar, availability calendar, timeline, booking system, booking form, reservation, events, appointment, availability, schedule, calendar, contact form
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 7.1
+Stable tag: 7.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -159,6 +159,13 @@ If you have any further questions, please fill free to <a href="mailto:support@w
 12. **Timeline**. Glance booking checking for a year (3 months or month), at front-end side of your website.
 
 == Changelog ==
+= 7.1.1 =
+- Changes in **all** versions:
+    * **Translation** German translation [100% completed]
+    * *Fix* Cross-site scripting potential vulnerability in booking form (7.1.1.2)
+- Changes in **Personal / Business Small / Business Medium / Business Large / MultiUser** versions:    
+    * *Fix* issue of Sage Pay payment,  if was configured several admin emails separated by  comma at Settings Emails page (7.1.1.1)
+
 = 7.1 =
 - Changes in **all** versions:
     * *New* Ability to limit times for showing cells in TimeLine for 1 day view mode. In TimeLine shortcode possible to use new parameter: **limit_hours='9,22'** Where 9 - its 09:00, start hour and 22 - its 22:00, end hour. For example: [bookingtimeline type='1' limit_hours='9,22'] or [bookingtimeline type='1,5' view_days_num=1 limit_hours='10,21'] (7.0.1.14)

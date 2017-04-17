@@ -1432,7 +1432,7 @@ class WPBC_Timeline {
                                     $is_show_popover_in_timeline = true;
                                     if ( $this->is_frontend )
                                         $is_show_popover_in_timeline  =  ( get_bk_option( 'booking_is_show_popover_in_timeline_front_end' ) == 'On' ) ? true : false ;
-                                    
+                              
                                     if ( $is_show_popover_in_timeline )
                                         echo '<a                                        
                                                     href="javascript:void(0)" 
@@ -2031,10 +2031,10 @@ class WPBC_Timeline {
         else                      $what_show_in_day_template = get_bk_option( 'booking_default_title_in_day_for_calendar_view_mode' );        
         
         if ( function_exists( 'get_title_for_showing_in_day' ) ) {
-            $text_in_day_cell .= get_title_for_showing_in_day( $bk_id, $bookings, $what_show_in_day_template );
+            $text_in_day_cell .= esc_textarea( get_title_for_showing_in_day( $bk_id, $bookings, $what_show_in_day_template ) );						// FixIn 7.1.1.2
         } else {
             if ( ! $this->is_frontend ) 
-                $text_in_day_cell .= $bk_id . ':' . $bookings[$bk_id]->form_data['_all_fields_']['name'];       // Default Free
+                $text_in_day_cell .= $bk_id . ':' . esc_textarea( $bookings[$bk_id]->form_data['_all_fields_']['name'] );       // Default Free		// FixIn 7.1.1.2
         }
         
         if ( ! $is_show_popover_in_timeline ) {
@@ -2139,7 +2139,7 @@ class WPBC_Timeline {
                 else                                                                $bk_title = get_booking_title( $bookings[$bk_id]->booking_type );
 
                 $content_text .= '<div class=\'text-left field-labels booking-labels\'>';            
-                $content_text .= '<span class=\'label label-default label-resource label-info\'>' . $bk_title . '</span>';
+                $content_text .= '<span class=\'label label-default label-resource label-info\'>' . esc_textarea( $bk_title ) . '</span>';	// FixIn 7.1.1.2
                 $content_text .= '</div>';
             } 
 
@@ -2151,9 +2151,9 @@ class WPBC_Timeline {
                     $pay_status = wpdev_bk_get_payment_status_simple( $bookings[$bk_id]->pay_status );                
                     $content_text .= '<div class=\'text-left field-labels booking-labels\'>';    
                     if ( wpbc_is_payment_status_ok( trim( $bookings[$bk_id]->pay_status ) ) )
-                        $content_text .= '<span class=\'label label-default label-payment-status payment-label-success\'><span class=\'label-payment-status-prefix\'>' . __( 'Payment', 'booking' ) . '</span> ' . $pay_status  . '</span>';
+                        $content_text .= '<span class=\'label label-default label-payment-status payment-label-success\'><span class=\'label-payment-status-prefix\'>' . esc_js( __( 'Payment', 'booking' ) ). '</span> ' . esc_js( $pay_status ) . '</span>';		// FixIn 7.1.1.3
                     else
-                        $content_text .= '<span class=\'label label-default label-payment-status payment-label-unknown\'><span class=\'label-payment-status-prefix\'>' . __( 'Payment', 'booking' ) . '</span> ' . $pay_status  . '</span>';
+                        $content_text .= '<span class=\'label label-default label-payment-status payment-label-unknown\'><span class=\'label-payment-status-prefix\'>' . esc_js( __( 'Payment', 'booking' ) ) . '</span> ' . esc_js( $pay_status ) . '</span>';		// FixIn 7.1.1.3
                     $content_text .= '</div>';                
                 } 
 
@@ -2176,7 +2176,7 @@ class WPBC_Timeline {
         if ( ! $this->is_frontend ) {
             // Trash
             $content_text .= '<div class=\'text-left field-labels booking-labels\'>'; 
-            $content_text .= '<span class=\'label label-trash label-danger' . ( ( ! $bookings[$bk_id]->trash ) ? ' hidden_items ' : '' ) . '\'>' . __('Trash' ,'booking') . '</span>';    //FixIn: 6.1.1.10 
+            $content_text .= '<span class=\'label label-trash label-danger' . ( ( ! $bookings[$bk_id]->trash ) ? ' hidden_items ' : '' ) . '\'>' . esc_js( __('Trash' ,'booking') ) . '</span>';    //FixIn: 6.1.1.10 // FixIn 7.1.1.3
             $content_text .= '</div>';
         }
         
@@ -2184,14 +2184,14 @@ class WPBC_Timeline {
         $content_text .= '<div class=\'clear\'></div>';                         // New line
         
         // Booking Data
-        $content_text .= '<div class=\'wpbc-popover-booking-data\'>' . $bookings[$bk_id]->form_show . '</div>'; 
+        $content_text .= '<div class=\'wpbc-popover-booking-data\'>' . esc_textarea( $bookings[$bk_id]->form_show ) . '</div>'; // FixIn 7.1.1.2
         
         $content_text .= '<div class=\'clear\'></div>';                         // New line
         
         
         // Notes 
         if ( ! empty( $bookings[$bk_id]->remark ) ) {        
-            $content_text .= '<div class=\'wpbc-popover-booking-notes\'>' . '<strong>' . __('Note', 'booking') . ':</strong> ' . $bookings[$bk_id]->remark . '</div>'; 
+            $content_text .= '<div class=\'wpbc-popover-booking-notes\'>' . '<strong>' . esc_js( __('Note', 'booking') ). ':</strong> ' . esc_textarea( $bookings[$bk_id]->remark ) . '</div>'; // FixIn 7.1.1.2		// FixIn 7.1.1.3
             $content_text .= '<div class=\'clear\'></div>';                     // New line            
         }
         

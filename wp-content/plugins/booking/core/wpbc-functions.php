@@ -1349,8 +1349,9 @@ $is_old = false;
         $value = strip_tags( $value );
                 
         // Clean SQL injection    
-        $value = esc_sql( $value );
-        
+        $value = esc_sql( $value );		
+		$value = esc_textarea( $value );																				// FixIn 7.1.1.2
+		
         return $value; 
     }
 
